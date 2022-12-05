@@ -24,8 +24,6 @@ lineReader.on("line", (line) => {
       if (maxCalories < currentHigh) {
         personWithMostCalories++;
         maxCalories = currentHigh;
-        console.log(maxCalories)
-        console.log(personWithMostCalories, "personWithMostCalories");
       }
     }
     currentHigh = 0;
