@@ -31,3 +31,7 @@ lineReader.on("line", (line) => {
     caloriesPerPerson = [];
   }
 });
+
+lineReader.on("close", () => {
+    console.log(maxCalories);
+})
