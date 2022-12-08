@@ -11,19 +11,7 @@ var lineReader = readline.createInterface({
   terminal: false,
 });
 
-const rock = 1;
-const paper = 2;
-const scissors = 3;
-const win = 6;
-const draw = 3;
-const lose = 0;
 let currentMatchUp = [];
-let myPoints = 0;
-
-// A/X = rock, B/Y = paper, C/Z = scissors
-const opponentMoves = ["A", "B", "C"];
-const myMoves = ["X", "Y", "Z"];
-
 let totalScore = 0;
 
 const selectionScores = {
@@ -58,8 +46,9 @@ const whatShouldBePlayedPairs = {
 
 lineReader.on("line", (line) => {
   currentMatchUp = line.split(" ");
-  const selectionScore = selectionScores[currentMatchUp[1]];
-  const outcomeScore = pairScores[`${currentMatchUp[0]}${currentMatchUp[1]}`];
+  const whatToPlay = whatShouldBePlayedPairs[`${currentMatchUp[0]}${currentMatchUp[1]}`];
+  const selectionScore = selectionScores[whatToPlay];
+  const outcomeScore = pairScores[`${currentMatchUp[0]}${whatToPlay}`];
   totalScore += selectionScore + outcomeScore;
 });
 
