@@ -6,32 +6,32 @@ const filePath = path.resolve(__dirname, "input.txt");
 
 const inputStream = fs.createReadStream(filePath);
 
-let maxCalories = 0;
 let caloriesPerPerson = [];
-let currentHigh = 0;
-let personWithMostCalories = 0;
+let calories = [];
 
 var lineReader = readline.createInterface({
   input: inputStream,
   terminal: false,
 });
 
+let num = 0;
 lineReader.on("line", (line) => {
-  if (line !== "") {
-    caloriesPerPerson.push(Number(line));
-    for (var i = 0; i < caloriesPerPerson.length; i++) {
-      currentHigh += caloriesPerPerson[i];
-      if (maxCalories < currentHigh) {
-        personWithMostCalories++;
-        maxCalories = currentHigh;
-      }
-    }
-    currentHigh = 0;
+  calories.push(+line);
+  if (line) {
+    num += +line;
+    console.log(num);
   } else {
-    caloriesPerPerson = [];
+    caloriesPerPerson.push(num);
+    console.log(caloriesPerPerson);
+    num = 0;
   }
 });
 
 lineReader.on("close", () => {
-    console.log(maxCalories);
-})
+  console.log(calories);
+  console.log(caloriesPerPerson);
+  caloriesPerPerson.push(calories[calories.length - 1])
+  const topThree = caloriesPerPerson.sort((a, b) => a - b)
+  console.log(topThree);
+  console.log(topThree.slice(-3).reduce((a, b) => a + b))
+;});
